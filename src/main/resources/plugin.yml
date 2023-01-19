@@ -1,0 +1,6 @@
+name: PlotWelcome
+main: com.bobcat00.plotwelcome.PlotWelcome
+version: ${project.version}
+author: Bobcat00
+api-version: 1.19
+softdepend: [PlotSquared]
