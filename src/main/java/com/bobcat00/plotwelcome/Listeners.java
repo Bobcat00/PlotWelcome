@@ -60,7 +60,7 @@ public final class Listeners implements Listener
                 {
                     if (player.isOnline())
                     {
-                        outputWelcomeMsg(player);
+                        outputWelcomeMsg(player, true);
                     }
                 }
             }, 6L); // time delay (ticks)
@@ -77,7 +77,7 @@ public final class Listeners implements Listener
         
         if (world.equals(plotworld))
         {
-            outputWelcomeMsg(player);
+            outputWelcomeMsg(player, false);
         }
     }
     
@@ -86,7 +86,7 @@ public final class Listeners implements Listener
     // Output a welcome message to the player informing him how many plots he
     // has. If he has no plots, tell him how to claim one.
     
-    private void outputWelcomeMsg(Player player)
+    private void outputWelcomeMsg(Player player, boolean log)
     {
         PlotPlayer<?> plotPlayer = psAPI.wrapPlayer(player.getUniqueId());
         
@@ -116,6 +116,12 @@ public final class Listeners implements Listener
             
             // Reminder for everybody
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aTo add someone to a plot, use &r/plot trust <player>"));
+            
+            // Output to log file
+            if (log)
+            {
+                plugin.getLogger().info(player.getName() + " has " + numPlots + " out of " + maxPlots + " plot" + (maxPlots == 1 ? "." : "s."));
+            }
         }
     }
     
